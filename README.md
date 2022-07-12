@@ -14,11 +14,17 @@ Additionally, the current version (SIDER 4.1) was released on October 21, 2015. 
 The Text Analysis Conference (TAC) is a series of evaluation workshops. The purpose of the 2017 TAC track was to test different natural language processing (NLP) approaches for their information extraction performance on adverse reactions found in labels. Participants were provided with 101 labeling samples for training. The results indicated the median performance was around 0.70, with the best performance being 0.82.
 
 ### Datasets and Methods
-The data used is from [TAC 2017: Adverse Drug Reaction Extraction from Drug Labels](https://bionlp.nlm.nih.gov/tac2017adversereactions/). One dataset used is the 101 released labeling samples. The other dataset, the **unannotated_xml.tar.gz** file, contains 2208 testing (unannotated) labels. This was used as the testing data. 
+The data used is from [TAC 2017: Adverse Drug Reaction Extraction from Drug Labels](https://bionlp.nlm.nih.gov/tac2017adversereactions/). One dataset used is the 101 released labeling samples from TAC2017. The other dataset, DPV-100, contained 100 annotated documents.
   - `data processing.py` contains the code for processing the 101 released labeling samples into the form that is used by the model. 
 
 ### Study Design
-The language model used is BERT. The 101 released labeling samples were split into 239 sections. 190 sections were used as training data for the model and 49 sections were used as testing data in test set 1. The 2208 unannotated labels were also used as testing data in test set 2.  
+The language model used is RxBERT. The 101 released labeling samples were split into 239 sections. 190 sections were used as training data for the model and 49 sections were used as testing data. Next, the RxBERT NER model trained by the TAC2017 data was tested on the DPV-100 dataset. 
+
 
 ### Results
-After around 100 epochs on test set 1, the evaluating performance saturated. The recall of the model is ~85%. Additionally, the model can find ~20% of terms that had not been annotated. The final result on test set 1 had a precision of 86.6%, recall of 86.3% and F1 of 86.45%. This is slightly better than the top performer of the 2017 TAC. 
+<img width="712" alt="Screen Shot 2022-07-11 at 9 28 41 PM" src="https://user-images.githubusercontent.com/106784802/178395443-ed906e92-2e65-4996-bf4b-a989ea16f1fb.png">
+After around 100 epochs on the TAC2017 101 released samples, the evaluating performance saturated. The recall of the model is ~85%. Additionally, the model can find ~20% of terms that had not been annotated. 
+
+<img width="538" alt="Screen Shot 2022-07-11 at 9 31 23 PM" src="https://user-images.githubusercontent.com/106784802/178395754-71ea6829-4f0b-4e6c-949a-2d79bc66afdf.png">
+This is the final result on the testing data (49 sections) using the RxBERT NLP model after 200 epochs. The final result had a precision of 86.6%, recall of 86.3% and F1 of 86.45%. This is slightly better than the top performer of the 2017 TAC, which had a precision of 82.5%, recall of 82.4%, and F1 of 82.5%. 
+
